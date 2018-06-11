@@ -1,7 +1,7 @@
 /*
   Clean the room function: given an input of [1,2,4,591,392,391,2,5,10,2,1,1,1,20,20],
   make a function that organizes these into individual array that is ordered.
-  For example answer(ArrayFromAbove) should return: [[1,1,1,1],[2,2], 4,5,10,[20,20], 391, 392,591].
+  For example answer(ArrayFromAbove) should return: [[1,1,1,1],[2,2,2],4,5,10,[20,20],391,392,591].
   Bonus: Make it so it organizes strings differently from number types.
   i.e. [1, "2", "3", 2] should return [[1,2], ["2", "3"]]
 */
@@ -34,21 +34,26 @@ const getGroup = (input) => {
   const numbers = groupDups(numberArray);
   const strings = groupDups(stringArray);
 
-  return {
-    numbers: numberArray,
-    strings: stringArray
-  };
+  return { numbers, strings };
 };
 
 const groupDups = (input) => {
-  let output = [];
-  let dupicate = [];
+  let groupArray = input.slice();
+  let currIndex = 0;
 
-  for (let i = 0; i < input.length - 1; i++) {
-    if (input[i] == input[i + 1]) {
+  while (currIndex < groupArray.length) {
+    let value = groupArray[currIndex];
+    let index = groupArray.lastIndexOf(value);
+    let count = index + 1 - currIndex;
 
+    if (count > 1) {
+      groupArray.splice(currIndex, count, Array(count).fill(value));
     }
+
+    currIndex++;
   }
+  
+  return groupArray;
 };
 
 output = cleanTheRoom(input);
