@@ -37,6 +37,6 @@ const toHex = (color) => {
 };
 
 const rgbFormat = 'rgb(255, 0, 224)';
-const hexFormat = '#f00e0';
+const hexFormat = '#ff00e0';
 
 console.log(convertColorFormat('(234, 52, 78)'));
